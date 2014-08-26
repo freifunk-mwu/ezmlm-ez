@@ -3,7 +3,7 @@
 LDIR="~/ezmlm"
 DOMAIN="freifunk-rheinmain.de"
 
-function default_list()
+function public_list()
 {
     echo "
         -A Not archived
@@ -18,11 +18,21 @@ function default_list()
         -W No adresss restriction
         -Y No sender confirmation
     "
-    ezmlm-make -+ -A -D -f -H -J -L -M -R -U -W -Y $LDIR/$1 ~/.qmail-$1 $1 $DOMAIN
+    ezmlm-make -+ -A -D -f -H -J -L -M -R -U -W -Y $LDIR/$2 ~/.qmail-$2 $2 $DOMAIN
 }
 
-if [ ! -z "$1" ]; then
-    default_list "$@"
+if [ -z "$@" ]; then
+    echo "Usage: [type] [list]"
 else
-    echo "Please specify a list."
+    while test $# -gt 0; do
+        case $1 in
+            pub)
+                public_list "$@"
+                shift
+                ;;
+            *)
+                echo "Wrong: $@"
+        esac
+        shift
+    done
 fi
