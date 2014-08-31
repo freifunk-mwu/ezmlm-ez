@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LDIR="~/ezmlm"
+LDIR="$HOME/ezmlm"
 DOMAIN="freifunk-rheinmain.de"
 
 function public_list()
@@ -18,21 +18,17 @@ function public_list()
         -W No adresss restriction
         -Y No sender confirmation
     "
-    ezmlm-make -+ -A -D -f -H -J -L -M -R -U -W -Y $LDIR/$2 ~/.qmail-$2 $2 $DOMAIN
+    ezmlm-make -+ -A -D -f -H -J -L -M -R -U -W -Y $LDIR/$1 $HOME/.qmail-$1 $1 $DOMAIN
 }
 
-if [ -z "$@" ]; then
-    echo "Usage: [type] [list]"
-else
-    while test $# -gt 0; do
-        case $1 in
-            pub)
-                public_list "$@"
-                shift
-                ;;
-            *)
-                echo "Wrong: $@"
-        esac
-        shift
-    done
-fi
+while test $# -gt 0; do
+    case $1 in
+        pub)
+            public_list "$2"
+            shift
+            ;;
+        *)
+            echo "Wrong: $@"
+            echo "Usage: [type] [list]"
+    esac
+done
