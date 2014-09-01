@@ -23,9 +23,16 @@ if [ -z "$LDIR" ] || [ -z "$DOMAIN" ]; then
 fi
 
 
+function new_list()
+{
+    echo "New List
+    "
+    ezmlm-make $LDIR/$1 $HOME/.qmail-$1 $1 $DOMAIN
+}
+
 function public_list()
 {
-    echo "
+    echo "Public List
         -A Not archived
         -D No Digest
         -f Prefix [listname]
@@ -43,13 +50,18 @@ function public_list()
 
 while test $# -gt 0; do
     case $1 in
+        new)
+            new_list "$2"
+            shift
+            ;;
         pub)
             public_list "$2"
+            shift
             ;;
         *)
             echo "Wrong: $@"
             echo "Usage: [type] [list]"
+            shift
             ;;
     esac
-    shift
 done
