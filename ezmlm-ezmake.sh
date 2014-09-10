@@ -25,8 +25,8 @@ fi
 function header_settings()
 {
     echo "<$1.$DOMAIN>" > $LDIR/$1/listid
-    echo "reply-to" > $LDIR/$1/headerremove
-    echo "Reply-To: <$1.$DOMAIN>" > $LDIR/$1/headeradd
+    echo "reply-to" >> $LDIR/$1/headerremove
+    echo "Reply-To: <$1.$DOMAIN>" >> $LDIR/$1/headeradd
 }
 
 function new_list()
