@@ -22,12 +22,19 @@ if [ -z "$LDIR" ] || [ -z "$DOMAIN" ]; then
     exit 23
 fi
 
+function header_settings()
+{
+    echo "<$1.$DOMAIN>" > $LDIR/$1/listid
+    echo "reply-to" > $LDIR/$1/headerremove
+    echo "Reply-To: <$1.$DOMAIN>" > $LDIR/$1/headeradd
+}
 
 function new_list()
 {
     echo "New List
     "
     ezmlm-make $LDIR/$1 $HOME/.qmail-$1 $1 $DOMAIN
+    header_settings $1
 }
 
 function public_list()
@@ -46,6 +53,7 @@ function public_list()
         -Y No sender confirmation
     "
     ezmlm-make -+ -A -D -f -H -J -L -M -R -U -W -Y $LDIR/$1 $HOME/.qmail-$1 $1 $DOMAIN
+    header_settings $1
 }
 
 while test $# -gt 0; do
