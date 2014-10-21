@@ -9,10 +9,6 @@ case $(whoami) in
         LDIR="$HOME/ezmlm"
         DOMAIN="freifunk-wiesbaden.de"
         ;;
-    ffrm)
-        LDIR="$HOME/ezmlm"
-        DOMAIN="freifunk-rheinmain.de"
-        ;;
     *)
         echo "Error! - No settings found"
         ;;
