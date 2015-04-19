@@ -123,7 +123,7 @@ do
             echo "Usage: `basename $0` new [priv|pub] [listname] [\"description\"]"
             echo "                       sub [listname] [email]"
             echo "                       unsub [listname] [email]"
-            echo "                       del [listname]
+            echo "                       del [listname]"
             exit 1
             ;;
     esac
